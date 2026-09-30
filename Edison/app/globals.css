@@ -1,5 +1,28 @@
 @import "tailwindcss";
 
+/* ========== 字体（本地系统字体栈，无任何网络依赖）==========
+   原先用 next/font/google 引入 Geist / Geist Mono / Noto Serif SC，
+   构建期需要访问 fonts.googleapis.com —— 在国内服务器上必然卡死或失败。
+   改为系统字体栈后：构建不需要联网，且 CJK 走 苹方 / 微软雅黑，中文显示更自然。
+   变量名保持不变，兼容 CodeMirror 等处的 var(--font-geist-mono) 引用。 */
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue",
+    Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+:root {
+  --font-geist-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", sans-serif;
+  --font-geist-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --font-noto-serif-sc: "Noto Serif SC", "Source Han Serif SC", "Songti SC",
+    SimSun, serif;
+}
+
 /* Tailwind CSS 4 class-based dark mode */
 @custom-variant dark (&:where(.dark, .dark *));
 

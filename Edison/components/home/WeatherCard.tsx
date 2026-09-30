@@ -37,6 +37,9 @@ interface ForecastDay {
   temp_min: number;
   weather_day: string;
   pop?: number; // 降水概率
+  cloud?: number; // 云量 %
+  uv_index?: number; // 紫外线指数
+  precip?: number; // 降水量 mm
   sunrise?: string;
   sunset?: string;
 }
