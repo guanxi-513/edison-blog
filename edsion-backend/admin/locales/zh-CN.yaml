@@ -241,7 +241,7 @@ login:
   pureVerifyCodeSixReg: 请输入6位数字验证码
   purePhoneReg: 请输入手机号码
   purePhoneCorrectReg: 请输入正确的手机号码格式
-  purePassWordRuleReg: 密码格式应为8-18位数字、字母、符号的任意两种组合
+  purePassWordRuleReg: 密码格式应为3-18位，且不能包含中文
   purePassWordSureReg: 请输入确认密码
   purePassWordDifferentReg: 两次密码不一致!
   purePassWordUpdateReg: 修改密码成功

@@ -241,7 +241,7 @@ login:
   pureVerifyCodeSixReg: Please enter a 6-digit verify code
   purePhoneReg: Please enter the phone
   purePhoneCorrectReg: Please enter the correct phone number format
-  purePassWordRuleReg: The password format should be any combination of 8-18 digits
+  purePassWordRuleReg: The password must be 3-18 characters and contain no Chinese
   purePassWordSureReg: Please enter confirm password
   purePassWordDifferentReg: The two passwords do not match!
   purePassWordUpdateReg: Password has been updated
