@@ -10,6 +10,7 @@ import {
 } from "@/api/friend-link";
 import type { FriendLinkItem } from "@/api/friend-link";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import { formatTime } from "@/utils/formatTime";
 
 defineOptions({ name: "FriendLinkIndex" });
 
@@ -51,15 +52,13 @@ const columns: TableColumnList = [
     label: "创建时间",
     prop: "created_at",
     minWidth: 170,
-    formatter: ({ created_at }) =>
-      created_at?.replace("T", " ").slice(0, 19) ?? ""
+    formatter: ({ created_at }) => formatTime(created_at, "YYYY-MM-DD HH:mm:ss", "")
   },
   {
     label: "修改时间",
     prop: "updated_at",
     minWidth: 170,
-    formatter: ({ updated_at }) =>
-      updated_at?.replace("T", " ").slice(0, 19) ?? ""
+    formatter: ({ updated_at }) => formatTime(updated_at, "YYYY-MM-DD HH:mm:ss", "")
   },
   { label: "操作", fixed: "right", width: 200, slot: "operation" }
 ];

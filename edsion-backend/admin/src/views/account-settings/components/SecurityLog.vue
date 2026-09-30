@@ -4,6 +4,7 @@ import { getMineLogs } from "@/api/user";
 import { reactive, ref, onMounted } from "vue";
 import { deviceDetection } from "@pureadmin/utils";
 import type { PaginationProps } from "@pureadmin/table";
+import { formatTime } from "@/utils/formatTime";
 
 defineOptions({
   name: "SecurityLog"
@@ -49,7 +50,7 @@ const columns: TableColumnList = [
     prop: "operatingTime",
     minWidth: 180,
     formatter: ({ operatingTime }) =>
-      dayjs(operatingTime).format("YYYY-MM-DD HH:mm:ss")
+      formatTime(operatingTime)
   }
 ];
 

@@ -15,6 +15,7 @@ import {
 import type { ChatterItem, ChatterCommentItem } from "@/api/chatter";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import type { PaginationProps } from "@pureadmin/table";
+import { formatTime } from "@/utils/formatTime";
 
 defineOptions({ name: "ChatterIndex" });
 
@@ -66,15 +67,13 @@ const columns: TableColumnList = [
     label: "创建时间",
     prop: "created_at",
     minWidth: 170,
-    formatter: ({ created_at }) =>
-      created_at?.replace("T", " ").slice(0, 19) ?? ""
+    formatter: ({ created_at }) => formatTime(created_at, "YYYY-MM-DD HH:mm:ss", "")
   },
   {
     label: "修改时间",
     prop: "updated_at",
     minWidth: 170,
-    formatter: ({ updated_at }) =>
-      updated_at?.replace("T", " ").slice(0, 19) ?? ""
+    formatter: ({ updated_at }) => formatTime(updated_at, "YYYY-MM-DD HH:mm:ss", "")
   },
   { label: "操作", fixed: "right", width: 200, slot: "operation" }
 ];
@@ -255,8 +254,7 @@ const commentColumns: TableColumnList = [
     label: "时间",
     prop: "created_at",
     minWidth: 160,
-    formatter: ({ created_at }) =>
-      created_at ? created_at.replace("T", " ").slice(0, 19) : ""
+    formatter: ({ created_at }) => formatTime(created_at, "YYYY-MM-DD HH:mm:ss", "")
   },
   { label: "操作", fixed: "right", width: 200, slot: "operation" }
 ];
@@ -591,11 +589,7 @@ onMounted(() => onSearch());
                       }}
                     </el-tag>
                     <span class="text-xs text-gray-400">
-                      {{
-                        reply.created_at
-                          ? reply.created_at.replace("T", " ").slice(0, 19)
-                          : ""
-                      }}
+                      {{ formatTime(reply.created_at, "YYYY-MM-DD HH:mm:ss", "") }}
                     </span>
                   </div>
                   <div class="text-sm">{{ reply.content }}</div>

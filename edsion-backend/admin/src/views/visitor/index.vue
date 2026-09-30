@@ -4,6 +4,7 @@ import { message } from "@/utils/message";
 import { getVisitors, getVisitorCount, deleteVisitor, clearVisitors } from "@/api/visitor";
 import type { VisitorItem } from "@/api/visitor";
 import type { PaginationProps } from "@pureadmin/table";
+import { formatTime } from "@/utils/formatTime";
 
 defineOptions({ name: "VisitorIndex" });
 
@@ -32,8 +33,7 @@ const columns: TableColumnList = [
     label: "访问时间",
     prop: "created_at",
     minWidth: 160,
-    formatter: ({ created_at }) =>
-      created_at ? created_at.replace("T", " ").slice(0, 19) : ""
+    formatter: ({ created_at }) => formatTime(created_at, "YYYY-MM-DD HH:mm:ss", "")
   },
   {
     label: "操作",

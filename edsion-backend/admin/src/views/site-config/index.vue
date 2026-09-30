@@ -8,6 +8,7 @@ import {
   deleteSiteConfig
 } from "@/api/siteConfig";
 import type { SiteConfigItem } from "@/api/siteConfig";
+import { formatTime } from "@/utils/formatTime";
 
 defineOptions({ name: "SiteConfigIndex" });
 
@@ -45,7 +46,7 @@ const columns: TableColumnList = [
     prop: "updated_at",
     width: 170,
     formatter: ({ updated_at }: SiteConfigItem) =>
-      updated_at ? updated_at.replace("T", " ").slice(0, 19) : ""
+      formatTime(updated_at, "YYYY-MM-DD HH:mm:ss", "")
   },
   {
     label: "操作",

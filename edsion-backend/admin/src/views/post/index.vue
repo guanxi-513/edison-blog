@@ -6,6 +6,7 @@ import { getPosts, deletePost, getPostCount } from "@/api/post";
 import type { PostItem } from "@/api/post";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import type { PaginationProps } from "@pureadmin/table";
+import { formatTime } from "@/utils/formatTime";
 
 defineOptions({ name: "PostIndex" });
 
@@ -45,14 +46,13 @@ const columns: TableColumnList = [
     label: "发布时间",
     prop: "published_at",
     minWidth: 160,
-    formatter: ({ published_at }) =>
-      published_at ? published_at.replace("T", " ").slice(0, 19) : "-"
+    formatter: ({ published_at }) => formatTime(published_at, "YYYY-MM-DD HH:mm:ss", "-")
   },
   {
     label: "修改时间",
     prop: "updated_at",
     minWidth: 160,
-    formatter: ({ updated_at }) => updated_at?.replace("T", " ").slice(0, 19) ?? ""
+    formatter: ({ updated_at }) => formatTime(updated_at, "YYYY-MM-DD HH:mm:ss", "")
   },
   {
     label: "操作",

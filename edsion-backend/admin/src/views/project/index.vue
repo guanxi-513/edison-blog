@@ -8,6 +8,7 @@ import {
   deleteProject
 } from "@/api/project";
 import type { ProjectItem } from "@/api/project";
+import { formatTime } from "@/utils/formatTime";
 import { http } from "@/utils/http";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 
@@ -54,7 +55,7 @@ const columns: TableColumnList = [
     prop: "created_at",
     width: 170,
     formatter: ({ created_at }: ProjectItem) =>
-      created_at?.replace("T", " ").slice(0, 19) ?? ""
+      formatTime(created_at, "YYYY-MM-DD HH:mm:ss", "")
   },
   { label: "操作", fixed: "right", width: 200, slot: "operation" }
 ];

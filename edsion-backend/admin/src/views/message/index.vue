@@ -10,6 +10,7 @@ import {
 import type { MessageItem } from "@/api/message";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import type { PaginationProps } from "@pureadmin/table";
+import { formatTime } from "@/utils/formatTime";
 
 defineOptions({ name: "MessageIndex" });
 
@@ -52,8 +53,7 @@ const columns: TableColumnList = [
     label: "时间",
     prop: "created_at",
     minWidth: 160,
-    formatter: ({ created_at }) =>
-      created_at ? created_at.replace("T", " ").slice(0, 19) : ""
+    formatter: ({ created_at }) => formatTime(created_at, "YYYY-MM-DD HH:mm:ss", "")
   },
   {
     label: "操作",
@@ -305,11 +305,7 @@ onMounted(() => onSearch());
                   }}
                 </el-tag>
                 <span class="text-xs text-gray-400">
-                  {{
-                    reply.created_at
-                      ? reply.created_at.replace("T", " ").slice(0, 19)
-                      : ""
-                  }}
+                  {{ formatTime(reply.created_at, "YYYY-MM-DD HH:mm:ss", "") }}
                 </span>
               </div>
               <div class="text-sm">{{ reply.content }}</div>
