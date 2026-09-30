@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 from sqlmodel import Session, select
 from fastapi import HTTPException
 
@@ -32,7 +33,7 @@ def update_category(session: Session, cat_id: int, data: BookmarkCategoryUpdate)
         raise HTTPException(status_code=404, detail="分类不存在")
     for k, v in data.model_dump(exclude_unset=True).items():
         setattr(cat, k, v)
-    cat.updated_at = datetime.now()
+    cat.updated_at = utcnow()
     session.add(cat)
     session.commit()
     session.refresh(cat)
@@ -86,7 +87,7 @@ def update_site(session: Session, site_id: int, data: BookmarkSiteUpdate) -> Boo
         update_data["platforms"] = json.dumps(update_data["platforms"], ensure_ascii=False)
     for k, v in update_data.items():
         setattr(site, k, v)
-    site.updated_at = datetime.now()
+    site.updated_at = utcnow()
     session.add(site)
     session.commit()
     session.refresh(site)

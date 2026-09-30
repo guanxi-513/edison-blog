@@ -1,4 +1,5 @@
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 from typing import Optional
 from sqlmodel import SQLModel, Field
 
@@ -21,5 +22,5 @@ class Project(SQLModel, table=True):
     status_label: str = Field(default="", max_length=20)
     is_featured: bool = Field(default=False)
     sort: int = Field(default=0)
-    created_at: datetime = Field(default_factory=datetime.now)
-    updated_at: datetime = Field(default_factory=datetime.now)
+    created_at: datetime = Field(default_factory=utcnow)
+    updated_at: datetime = Field(default_factory=utcnow)

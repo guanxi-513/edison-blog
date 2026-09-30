@@ -1,4 +1,5 @@
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 from sqlmodel import Session, select
 from fastapi import HTTPException
 
@@ -30,7 +31,7 @@ def update_friend_link(
         raise HTTPException(status_code=404, detail="友链不存在")
     for k, v in data.model_dump(exclude_unset=True).items():
         setattr(fl, k, v)
-    fl.updated_at = datetime.now()
+    fl.updated_at = utcnow()
     session.add(fl)
     session.commit()
     session.refresh(fl)

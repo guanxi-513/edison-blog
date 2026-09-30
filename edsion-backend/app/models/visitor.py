@@ -1,4 +1,5 @@
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 from typing import Optional
 from sqlmodel import SQLModel, Field
 
@@ -22,4 +23,4 @@ class Visitor(SQLModel, table=True):
     browser: str = Field(default="", max_length=50)
     os: str = Field(default="", max_length=50)
     device_type: str = Field(default="", max_length=20)
-    created_at: datetime = Field(default_factory=datetime.now)
+    created_at: datetime = Field(default_factory=utcnow)

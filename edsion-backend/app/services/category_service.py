@@ -1,4 +1,5 @@
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 from sqlmodel import Session, select
 from fastapi import HTTPException
 
@@ -31,7 +32,7 @@ def update_category(session: Session, cat_id: int, data: CategoryUpdate) -> Cate
         raise HTTPException(status_code=404, detail="分类不存在")
     for k, v in data.model_dump(exclude_unset=True).items():
         setattr(cat, k, v)
-    cat.updated_at = datetime.now()
+    cat.updated_at = utcnow()
     session.add(cat)
     session.commit()
     session.refresh(cat)

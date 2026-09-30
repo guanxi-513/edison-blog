@@ -1,4 +1,5 @@
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 from typing import Optional
 from sqlmodel import SQLModel, Field
 
@@ -14,4 +15,4 @@ class Comment(SQLModel, table=True):
     likes: int = Field(default=0)
     ip: str = Field(default="", max_length=45)
     status: str = Field(default="approved", max_length=20, index=True)
-    created_at: datetime = Field(default_factory=datetime.now)
+    created_at: datetime = Field(default_factory=utcnow)

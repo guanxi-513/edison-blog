@@ -1,6 +1,7 @@
 """仪表盘数据接口"""
 
 from datetime import datetime, timedelta
+from app.utils.datetime_utils import utcnow
 from fastapi import APIRouter, Depends
 from sqlmodel import Session, select, func, col
 from app.database import get_session
@@ -11,7 +12,7 @@ router = APIRouter(prefix="/api/dashboard", tags=["仪表盘"])
 
 @router.get("/stats")
 def get_dashboard_stats(session: Session = Depends(get_session)):
-    now = datetime.now()
+    now = utcnow()
     thirty_days_ago = now - timedelta(days=30)
 
     # ── 总数统计 ──

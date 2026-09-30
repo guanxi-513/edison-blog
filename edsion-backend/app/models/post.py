@@ -1,4 +1,5 @@
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 from typing import Optional
 from sqlmodel import SQLModel, Field
 
@@ -12,8 +13,8 @@ class Category(SQLModel, table=True):
     description: str = Field(default="", max_length=200)
     sort: int = Field(default=0)
     post_count: int = Field(default=0)
-    created_at: datetime = Field(default_factory=datetime.now)
-    updated_at: datetime = Field(default_factory=datetime.now)
+    created_at: datetime = Field(default_factory=utcnow)
+    updated_at: datetime = Field(default_factory=utcnow)
 
 
 class Tag(SQLModel, table=True):
@@ -49,5 +50,5 @@ class Post(SQLModel, table=True):
     word_count: int = Field(default=0)
     reading_time: int = Field(default=0)
     published_at: Optional[datetime] = Field(default=None)
-    created_at: datetime = Field(default_factory=datetime.now)
-    updated_at: datetime = Field(default_factory=datetime.now)
+    created_at: datetime = Field(default_factory=utcnow)
+    updated_at: datetime = Field(default_factory=utcnow)

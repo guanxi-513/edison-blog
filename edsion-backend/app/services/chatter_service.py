@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 from sqlmodel import Session, select, func
 from fastapi import HTTPException
 
@@ -92,7 +93,7 @@ def create_chatter(session: Session, data: ChatterCreate) -> dict:
         status=data.status,
     )
     if c.status == "published":
-        c.created_at = datetime.now()
+        c.created_at = utcnow()
     session.add(c)
     session.commit()
     session.refresh(c)
@@ -112,7 +113,7 @@ def update_chatter(session: Session, chatter_id: int, data: ChatterUpdate) -> di
         c.mood = data.mood
     if data.status is not None:
         c.status = data.status
-    c.updated_at = datetime.now()
+    c.updated_at = utcnow()
     session.add(c)
     session.commit()
     session.refresh(c)

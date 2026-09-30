@@ -1,4 +1,5 @@
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 from typing import Optional
 from sqlmodel import SQLModel, Field
 
@@ -10,4 +11,4 @@ class SiteConfig(SQLModel, table=True):
     key: str = Field(max_length=100, unique=True)
     value: str = Field(default="")
     description: str = Field(default="", max_length=200)
-    updated_at: datetime = Field(default_factory=datetime.now)
+    updated_at: datetime = Field(default_factory=utcnow)

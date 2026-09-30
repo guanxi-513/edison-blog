@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from app.utils.datetime_utils import utcnow
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlmodel import Session, select
 
@@ -68,7 +69,7 @@ def login(req: LoginRequest, request: Request, session: Session = Depends(get_se
     login_limiter.reset(ip)
 
     token = create_token({"sub": user.username, "admin": user.is_admin})
-    expires = datetime.utcnow() + timedelta(hours=ACCESS_TOKEN_EXPIRE_HOURS)
+    expires = utcnow() + timedelta(hours=ACCESS_TOKEN_EXPIRE_HOURS)
 
     return {
         "code": 0,
@@ -126,7 +127,7 @@ def update_me(
         db_user.bio = data.get("bio") or data.get("description") or ""
     if "avatar" in data:
         db_user.avatar = data["avatar"]
-    db_user.updated_at = datetime.now()
+    db_user.updated_at = utcnow()
     session.add(db_user)
     session.commit()
     session.refresh(db_user)

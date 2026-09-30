@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """直接向 SQLite 插入一篇已发布文章（绕过登录，用于本地初始化内容）"""
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 from sqlmodel import Session, select
 
 from app.database import engine
@@ -34,7 +35,7 @@ POST = {
     "tags": ["随笔", "开张"],
 }
 
-now = datetime.now()
+now = utcnow()
 with Session(engine) as session:
     # 幂等：slug 已存在则跳过
     existing = session.exec(select(Post).where(Post.slug == POST["slug"])).first()

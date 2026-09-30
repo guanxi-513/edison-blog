@@ -1,4 +1,5 @@
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 from typing import Optional
 from sqlmodel import SQLModel, Field
 
@@ -13,8 +14,8 @@ class Chatter(SQLModel, table=True):
     likes: int = Field(default=0)
     comments_count: int = Field(default=0)
     status: str = Field(default="draft", max_length=20, index=True)
-    created_at: datetime = Field(default_factory=datetime.now)
-    updated_at: datetime = Field(default_factory=datetime.now)
+    created_at: datetime = Field(default_factory=utcnow)
+    updated_at: datetime = Field(default_factory=utcnow)
 
 
 class ChatterComment(SQLModel, table=True):
@@ -28,4 +29,4 @@ class ChatterComment(SQLModel, table=True):
     ip: str = Field(default="", max_length=45)
     likes: int = Field(default=0)
     status: str = Field(default="approved", max_length=20, index=True)
-    created_at: datetime = Field(default_factory=datetime.now)
+    created_at: datetime = Field(default_factory=utcnow)

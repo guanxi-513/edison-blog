@@ -1,4 +1,5 @@
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 from typing import Optional
 from sqlmodel import SQLModel, Field
 
@@ -11,4 +12,4 @@ class GitHubUser(SQLModel, table=True):
     login: str = Field(max_length=100)
     avatar: str = Field(default="", max_length=500)
     bio: str = Field(default="", max_length=500)
-    created_at: datetime = Field(default_factory=datetime.now)
+    created_at: datetime = Field(default_factory=utcnow)

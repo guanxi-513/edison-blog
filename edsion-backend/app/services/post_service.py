@@ -1,4 +1,5 @@
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 import json
 from sqlmodel import Session, select, func
 from fastapi import HTTPException
@@ -151,7 +152,7 @@ def create_post(session: Session, data: PostCreate) -> dict:
             post.reading_time = max(1, post.word_count // 300)
 
     if post.status == "published" and not post.published_at:
-        post.published_at = datetime.now()
+        post.published_at = utcnow()
 
     session.add(post)
     session.flush()
@@ -185,9 +186,9 @@ def update_post(session: Session, post_id: int, data: PostUpdate) -> dict:
             post.reading_time = max(1, post.word_count // 300)
 
     if post.status == "published" and not post.published_at:
-        post.published_at = datetime.now()
+        post.published_at = utcnow()
 
-    post.updated_at = datetime.now()
+    post.updated_at = utcnow()
     session.add(post)
     session.flush()
 

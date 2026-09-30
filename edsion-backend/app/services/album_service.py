@@ -1,4 +1,5 @@
 from datetime import datetime
+from app.utils.datetime_utils import utcnow
 from sqlmodel import Session, select, func
 from fastapi import HTTPException
 
@@ -31,7 +32,7 @@ def update_album(session: Session, album_id: int, data: AlbumUpdate) -> Album:
         raise HTTPException(status_code=404, detail="相册不存在")
     for k, v in data.model_dump(exclude_unset=True).items():
         setattr(album, k, v)
-    album.updated_at = datetime.now()
+    album.updated_at = utcnow()
     session.add(album)
     session.commit()
     session.refresh(album)
@@ -67,7 +68,7 @@ def add_photo(session: Session, data: PhotoCreate) -> Photo:
             select(func.count(Photo.id)).where(Photo.album_id == data.album_id)
         ).one()
         album.photo_count = count
-        album.updated_at = datetime.now()
+        album.updated_at = utcnow()
         session.add(album)
     session.commit()
     session.refresh(photo)
@@ -87,6 +88,6 @@ def delete_photo(session: Session, photo_id: int):
             select(func.count(Photo.id)).where(Photo.album_id == album_id)
         ).one()
         album.photo_count = count
-        album.updated_at = datetime.now()
+        album.updated_at = utcnow()
         session.add(album)
     session.commit()
