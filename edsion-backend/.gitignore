@@ -1,0 +1,15 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+.idea/
+.vscode/
+*.db
+dist/
+# 例外：admin/dist 是管理后台的构建产物，部署时要求开箱即用
+# （在服务器上重建 vue-pure-admin 代价很大）。
+# 注意：必须在本文件里显式取反 —— 根 .gitignore 的 ! 规则优先级低于本文件，覆盖不了上面这条。
+!admin/dist/
+!admin/dist/**
+node_modules/

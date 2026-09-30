@@ -1,0 +1,103 @@
+# 依赖
+node_modules/
+.pnp
+.pnp.*
+
+# 构建产物
+.next/
+out/
+build/
+!Kirameku-backend/admin/build/
+dist/
+
+# 环境变量
+.env
+.env.*
+!.env.example
+!.env.development
+!.env.production
+!.env.staging
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+*.pem
+
+# IDE & AI
+.idea/
+.vscode/
+.claude/
+CLAUDE.md
+*.swp
+*.swo
+
+# 日志
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+*.log
+
+# 数据库
+*.db
+*.sqlite
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Vercel
+.vercel
+
+# 上传文件
+uploads/
+
+# 压缩包
+*.zip
+
+# 其他
+.eslintcache
+report.html
+
+# Star 记录
+star-history.md
+
+# 阅读服务端
+reader-master/
+
+# 深度学习
+deep-learning/
+
+# Kova
+Kova/
+
+# ================= Edison 部署仓库补充规则 =================
+
+# 看板娘模型库（217MB，前端运行时按需加载，不适合放 git）
+# 需要看板娘时单独上传：Edison/public/live2d/model
+Edison/public/live2d/model/
+
+# APK 与 Capacitor 构建产物
+*.apk
+edison-app/android/app/build/
+edison-app/android/app/src/main/assets/public/
+edison-app/build.log
+edison-app/sync.log
+*.keystore
+
+# 个人素材，不进公开仓库
+项目图片/
+
+# 上游项目文档截图（README 已改为本仓库版本）
+docs/
+
+# 后端管理后台构建产物：部署时直接可用（服务器重建代价大），特意保留
+!edsion-backend/admin/dist/
+!edsion-backend/admin/dist/**

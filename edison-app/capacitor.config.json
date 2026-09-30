@@ -1,0 +1,11 @@
+{
+  "appId": "com.dacong.edison",
+  "appName": "Edison",
+  "webDir": "../edsion-backend/mobile",
+  "server": {
+    "androidScheme": "http"
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}

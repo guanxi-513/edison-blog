@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#f5f6fa" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<title>Edison 发布</title>
+<link rel="icon" href="/icon.png" />
+<link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+<!-- ============ 登录页 ============ -->
+<section id="loginView" class="view active">
+  <div class="login-wrap">
+    <img id="loginLogo" class="login-logo" src="./logo.png" alt="logo" onerror="this.style.display='none'" />
+    <h1 class="login-title">Edison 发布</h1>
+    <p class="login-sub">随时记录，随手发布</p>
+
+    <div class="field">
+      <label>用户名</label>
+      <input id="loginUser" type="text" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="请输入用户名" />
+    </div>
+    <div class="field">
+      <label>密码</label>
+      <input id="loginPass" type="password" autocomplete="current-password" placeholder="请输入密码" />
+    </div>
+
+    <details class="server-box">
+      <summary>服务器地址</summary>
+      <div class="field">
+        <input id="loginBase" type="url" inputmode="url" placeholder="留空=当前地址（如 http://192.168.1.5:8000）" />
+      </div>
+      <p class="hint">本机测试时留空即可；以后部署到服务器，填 https://你的域名</p>
+    </details>
+
+    <button id="loginBtn" class="btn btn-primary btn-block">登录</button>
+    <p id="loginMsg" class="msg"></p>
+  </div>
+</section>
+
+<!-- ============ 主应用 ============ -->
+<section id="appView" class="view">
+  <header class="topbar">
+    <span class="topbar-title">Edison 发布</span>
+    <div class="topbar-actions">
+      <button id="settingsBtn" class="icon-btn" title="设置">⚙</button>
+    </div>
+  </header>
+
+  <main class="content">
+    <!-- 发布 -->
+    <div id="tabPublish" class="tab-pane active">
+      <div class="card">
+        <textarea id="content" class="textarea" rows="6" placeholder="此刻在想什么……"></textarea>
+
+        <div class="thumbs" id="thumbs"></div>
+
+        <div class="row">
+          <label class="btn btn-ghost" for="fileInput">＋ 图片</label>
+          <input id="fileInput" type="file" accept="image/*" multiple hidden />
+          <input id="mood" class="mood-input" type="text" maxlength="10" placeholder="心情（可选）" />
+        </div>
+
+        <div class="row row-end">
+          <button id="draftBtn" class="btn btn-ghost">存草稿</button>
+          <button id="publishBtn" class="btn btn-primary">发布</button>
+        </div>
+        <p id="publishMsg" class="msg"></p>
+      </div>
+    </div>
+
+    <!-- 已发布 -->
+    <div id="tabList" class="tab-pane">
+      <div class="list-filter">
+        <button class="chip active" data-status="">全部</button>
+        <button class="chip" data-status="published">已发布</button>
+        <button class="chip" data-status="draft">草稿</button>
+      </div>
+      <div id="listBox" class="list-box"></div>
+      <button id="loadMoreBtn" class="btn btn-ghost btn-block hidden">加载更多</button>
+    </div>
+
+    <!-- 照片 -->
+    <div id="tabPhoto" class="tab-pane">
+      <div class="card">
+        <div class="album-bar">
+          <div id="albumChips" class="album-chips"></div>
+          <button id="newAlbumBtn" class="album-chip chip-add">＋ 新建</button>
+        </div>
+
+        <div id="newAlbumBox" class="new-album hidden">
+          <input id="newAlbumTitle" type="text" maxlength="20" placeholder="相册名称，如：随手拍" />
+          <button id="createAlbumBtn" class="btn btn-primary btn-sm">创建</button>
+          <button id="cancelAlbumBtn" class="btn btn-ghost btn-sm">取消</button>
+        </div>
+
+        <div class="row">
+          <label id="photoPickLabel" class="btn btn-ghost" for="photoInput">＋ 选择照片</label>
+          <input id="photoInput" type="file" accept="image/*" multiple hidden />
+        </div>
+        <p id="photoMsg" class="msg"></p>
+      </div>
+
+      <div id="photoGrid" class="photo-grid"></div>
+      <p id="photoEmpty" class="empty hidden">这个相册还没有照片</p>
+    </div>
+  </main>
+
+  <nav class="tabbar">
+    <button class="tab active" data-tab="tabPublish"><span class="tab-icon">✎</span>发布</button>
+    <button class="tab" data-tab="tabPhoto"><span class="tab-icon">▣</span>照片</button>
+    <button class="tab" data-tab="tabList"><span class="tab-icon">☰</span>管理</button>
+  </nav>
+</section>
+
+<!-- ============ 设置面板 ============ -->
+<div id="settingsSheet" class="sheet-mask hidden">
+  <div class="sheet">
+    <h3>设置</h3>
+    <div class="field">
+      <label>服务器地址</label>
+      <input id="setBase" type="url" inputmode="url" placeholder="留空=当前地址" />
+      <p class="hint">部署到服务器后改为 https://你的域名</p>
+    </div>
+    <button id="testConnBtn" class="btn btn-ghost btn-block">测试连接</button>
+    <p id="testResult" class="hint"></p>
+    <div class="field">
+      <label>当前登录</label>
+      <div class="muted" id="setUser">-</div>
+    </div>
+    <button id="saveBaseBtn" class="btn btn-primary btn-block">保存地址</button>
+    <button id="logoutBtn" class="btn btn-danger btn-block">退出登录</button>
+    <button id="closeSheetBtn" class="btn btn-ghost btn-block">关闭</button>
+  </div>
+</div>
+
+<!-- ============ 图片预览 ============ -->
+<div id="previewMask" class="preview-mask hidden">
+  <img id="previewImg" src="" alt="" />
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="./app.js"></script>
+</body>
+</html>
